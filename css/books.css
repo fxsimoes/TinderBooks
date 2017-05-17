@@ -96,7 +96,11 @@ border:7px solid black;
 
 }
 
+.classFix{
 
+	margin-left: auto;
+	float:none;
+}
 
 /*              ANIMATION             */
 
