@@ -35,8 +35,6 @@ function loadData() {
 	<h1></h1>
 	<sub></sub>
 	<p class="center-block"></p>
-	<br>
-	<br>
 	<a class="wiki"></a>
 	<a class="reads"></a>
 	</div>
@@ -62,7 +60,7 @@ function loadData() {
 loadData();
 
 
-$allBooks=$(".book");
+
 var arrayTitles = new Array();
 
 //			Like Button
@@ -83,7 +81,6 @@ function loadDataAPI(book) {
 	<h1></h1>
 	<sub></sub>
 	<p class="center-block"></p>
-	<br>
 	<br>
 	<a class="gbooks"></a>
 	<a class="reads"></a>
@@ -112,14 +109,10 @@ $.ajax({
 	console.log(data);
 });
 
+$allBooks=$(".book");
 
 // 			Buttons
 
-$("#bookContainer").hide();
-$("#endPage").hide();
-$("#myTable").hide();
-$('.buttons').hide();
-$('.likedbooks').hide();
 
 $("#startButton").click(function(){
 	$("#startPage").hide();
@@ -135,7 +128,6 @@ $("#restartButton").click(function(){
 	$("#startPage").show();
 	$("#bookContainer").hide();
 	$(".favorite").hide();
-	$("#myTable").hide();
 	$('.buttons').hide();
 });
 
@@ -144,26 +136,25 @@ $("#clearTable").click(function() {
 });
 
 $(".buttons button.like, button.dislike").click(function() {
-
-	$child = $('.bookDiv').children(".book").first();
-	var index = $allBooks.index($child);
+	
 	$book = $(".book.active");
+	$child = $('.bookDiv').children(".book").first();
+	$children= $('.bookDiv').children(".book");
+	$index = $allBooks.index($book);
 	$next = $book.next(".book");
-	console.log(index);
+	console.log($index);
+	console.log($children);
 	// 		Ciclo de Livros Infinito
 	
-	if( index >= $allBooks.length-1 ){
+	if( $index == $allBooks.length-1 ){
 		$next = $allBooks.eq(0);
 	}
 
-	if( index == $allBooks.eq(-1)){
-		$('#bookContainer').hide();
-	}
 	// -------------------------------
 	
-	$book.fadeOut(150, function() {
+	$book.fadeOut(50, function() {
 		$book.removeClass("active");
-		$next.fadeIn(150,function() {
+		$next.fadeIn(50,function() {
 			$next.addClass("active");
 		});
 	});
@@ -174,7 +165,7 @@ function AddRow(opinion){
 	var author = $book.children("sub").text();
 	var title = $book.children("h1").text();
 
-	$('#myTable tr:last').after('<tr class="' + ((opinion == "Like") ? 'success' : 'danger') + '"><td>' + title + '</td><td>' + author + '</td><td>' + opinion + '</td></tr>');
+	$('#myTable tbody').append('<tr class="' + ((opinion == "Like") ? 'success' : 'danger') + '"><td>' + title + '</td><td>' + author + '</td><td>' + opinion + '</td></tr>');
 }
 
 $(".buttons button.like").click(function() {
@@ -231,19 +222,10 @@ function LikeTable() {
 
 	$(".navliked").click(function(){
 
-		$active = $(".active");
-
-		$(window).scrollTop(0);
-
-		$active.fadeOut(50, function(){
-			$active.removeClass("active");
-
-			$(window).scrollTop(0);
-
-			$(".likedbooks").fadeIn(0, function(){
-				$(".likedbooks").addClass("active");
+		$(".likedbooks").fadeIn(0, function(){
+			$(".likedbooks").addClass("active");
 			});
-		});
+
 		$("#endPage").hide();
 		$("#startPage").hide();
 		$("#bookContainer").hide();
@@ -274,7 +256,6 @@ $(document).ready(function(){
 			$("#bookContainer").show();
 			$("#endPage").show();
 			$(".favorite").hide();
-			$("#myTable").show();
 			$('.buttons').show();
     }); 
 });

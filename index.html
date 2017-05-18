@@ -42,20 +42,21 @@
 		<div class="container">
 
 			<br><br><br>	
-			<div id="startPage">
+			<div id="startPage" class='row'>
 				<img src="https://media.giphy.com/media/46kl1Zvl499OE/giphy.gif" style='width: 750px; height: 550px;' id='clickimg' class='center-block'>
+<!-- 	<button class='buttonStart center-block'><span> START </span></button> -->
 			</div>
 			<div id="endPage">
 				<br>
 			</div>
 
 			<div id="bookContainer" class="bookDiv row"> 
-
+f
 			</div>	
 			<div class='btn-group buttons col-xs-4 col-xs-offset-4 clearfix'>
 				<button class="btn btn-primary like pull-left"> Like <span class="glyphicon glyphicon-thumbs-up"></span> </button> 
 				<button class="btn btn-primary dislike pull-right"> Dislike <span class="glyphicon glyphicon-thumbs-down"></span> </button>
-				<button class="btn btn-custom star center-block classFix" href="#"><span class="likestar glyphicon glyphicon-star"></span></button>
+				<button class="star center-block classFix btn btn-custom" href="#"><span class="classFix likestar glyphicon glyphicon-star"></span></button>
 				<br>
 				<br>
 				<br>
@@ -64,7 +65,7 @@
 
 		</div>
 
-		<div id="LikedDis" class="container">
+		<div id="Favs" class="container">
 			<div class='row'>
 				<div class="favorites col-xs-8 col-xs-offset-2">
 					<div class="favspage center-block">
@@ -89,7 +90,8 @@
 							<tbody>
 							</tbody>
 						</table>
-						<button id="clearTable" class="btn btn-primary">  Clear Likes/Dislikes  <span class="glyphicon glyphicon-trash"></span> </button>
+						<button id="clearTable" class="btn btn-primary pull-right">  Clear Likes/Dislikes  <span class="glyphicon glyphicon-trash"></span> </button>
+						<button id='Rewind' class='btn btn-primary pull-left'>Resume search</button>
 					</div>
 				</div>
 			</div>
