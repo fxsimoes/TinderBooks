@@ -62,11 +62,9 @@ loadData();
 
 
 var arrayTitles = new Array();
-
-//			Like Button
-
 var countDislike=0;
 var countLike=0;
+var ArrayCounter = [];
 
 // 			AJAX
 
@@ -109,41 +107,29 @@ $.ajax({
 	console.log(data);
 });
 
-$allBooks=$(".book");
+
 
 // 			Buttons
 
 
-$("#startButton").click(function(){
-	$("#startPage").hide();
-	$("#bookContainer").show();
-	$("#endPage").show();
-	$(".favorite").hide();
-	$("#myTable").show();
-	$('.buttons').show();
-});
-
-$("#restartButton").click(function(){
-	$("#endPage").hide();
-	$("#startPage").show();
-	$("#bookContainer").hide();
-	$(".favorite").hide();
-	$('.buttons').hide();
-});
-
-$("#clearTable").click(function() {
-	$("#myTable td").parent().remove();
-});
-
 $(".buttons button.like, button.dislike").click(function() {
 	
 	$book = $(".book.active");
-	$child = $('.bookDiv').children(".book").first();
-	$children= $('.bookDiv').children(".book");
+	$allBooks=$(".book");
 	$index = $allBooks.index($book);
 	$next = $book.next(".book");
-	console.log($index);
-	console.log($children);
+	$book = $(".book.active");
+	var title = $book.children("h1").text();
+
+	if($.inArray(title, ArrayCounter) && $.inArray("Like", ArrayCounter)){
+		// ArrayCounter.replace('Like', 'Dislike');
+		console.log(ArrayCounter);
+	}
+	else if ($.inArray(title, ArrayCounter) && $.inArray("Dislike", ArrayCounter)){
+		// ArrayCounter.replace(["Dislike", "Like"]);
+		console.log(ArrayCounter);
+	}
+
 	// 		Ciclo de Livros Infinito
 	
 	if( $index == $allBooks.length-1 ){
@@ -152,12 +138,11 @@ $(".buttons button.like, button.dislike").click(function() {
 
 	// -------------------------------
 	
-	$book.fadeOut(50, function() {
 		$book.removeClass("active");
-		$next.fadeIn(50,function() {
-			$next.addClass("active");
-		});
-	});
+		$next.addClass("active");
+
+
+
 });
 
 function AddRow(opinion){
@@ -170,10 +155,35 @@ function AddRow(opinion){
 
 $(".buttons button.like").click(function() {
 	AddRow("Like");
+	$book = $(".book.active");
+	var title = $book.children("h1").text();
+	ArrayCounter.push([title,"Like"]);
 });
 
 $(".buttons button.dislike").click(function() {
 	AddRow("Dislike");
+	$book = $(".book.active");
+	var title = $book.children("h1").text();
+	ArrayCounter.push([title,"Dislike"]);
+});
+
+
+
+
+$('#Backwards').click(function() {
+
+	$book = $(".book.active");
+	$allBooks=$(".book");
+	$index = $allBooks.index($book);
+	$prev = $book.prev(".book");
+	$book.removeClass('active');
+	$prev.addClass('active');
+
+	ArrayCounter.pop();
+
+
+
+
 });
 
 function LikedBooks() {
@@ -237,18 +247,39 @@ function LikeTable() {
 
 LikeTable();
 
-function HomePage() {
 
-	$(".home").click(function() {
-		$("#startPage").show()
-		$("#bookContainer").hide();
-		$("#endPage").hide();
-		$("#myTable").hide();
+$("#startButton").click(function(){
+	$("#startPage").hide();
+	$("#bookContainer").show();
+	$(".favorite").hide();
+	$('.buttons').show();
+});
 
-	});
-}
 
-HomePage();
+$("#clearTable").click(function() {
+	$("#myTable td").parent().remove();
+});
+
+
+$(".home").click(function HomePage() {
+	$("#startPage").show()
+	$("#bookContainer").hide();
+	$("#endPage").hide();
+	$("#myTable").hide();
+
+});
+
+
+
+$("#restartButton").click(function(){
+$("#endPage").hide();
+$("#startPage").show();
+$("#bookContainer").hide();
+$(".favorite").hide();
+$('.buttons').hide();
+});
+
+
 
 $(document).ready(function(){
     $("#clickimg").click(function(){
